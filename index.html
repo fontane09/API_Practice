@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>티켓플렉스</title>
+    <!-- Pretendard GOV font -->
+    <link
+      rel="stylesheet"
+      as="style"
+      crossorigin
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-gov-dynamic-subset.min.css"
+    />
+    <!-- font awesome cdnjs -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- swiper link -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+    <!-- css, js -->
+    <link rel="stylesheet" href="./common/my_reset.css" />
+    <link rel="stylesheet" href="./common/style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="./common/main.js" defer></script>
+  </head>
+  <body>
+    <div class="wrap">
+      <header>
+        <div class="logo">
+          <img src="./img/mainlogo.png" alt="로고" />
+        </div>
+        <i class="fa-solid fa-bars ham"></i>
+
+        <nav>
+          <button data-cate="뮤지컬" data-value="sample">뮤지컬</button>
+          <button data-cate="연극">연극</button>
+          <button data-cate="클래식">클래식</button>
+          <button data-cate="무용">무용</button>
+          <button data-cate="국악">국악</button>
+          <button data-cate="아동">아동</button>
+          <button data-cate="복합">복합</button>
+        </nav>
+        <ul class="login">
+          <li>로그인</li>
+          <li>회원가입</li>
+          <li>고객센터</li>
+        </ul>
+      </header>
+      <!-- hero image section -->
+      <section class="hero">
+        <div class="swiper mySwiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">공연 포스터 1</div>
+            <div class="swiper-slide">공연 포스터 2</div>
+            <div class="swiper-slide">공연 포스터 3</div>
+            <div class="swiper-slide">공연 포스터 4</div>
+            <div class="swiper-slide">공연 포스터 5</div>
+            <div class="swiper-slide">공연 포스터 6</div>
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+      </section>
+      <section class="search">
+        <label class="inputArea"
+          ><input type="text" placeholder="공연명을 입력해 주세요" /><i
+            class="fa-solid fa-magnifying-glass searchBtn"
+          ></i
+        ></label>
+        <button type="button">장르별</button>
+        <button type="menu">지역별</button>
+      </section>
+
+      <main>
+        <ul class="listCon">
+          <!-- 데이터 출력 영역 -->
+        </ul>
+        <div class="pgcon">
+          <button class="on">1</button>
+          <button>2</button>
+        </div>
+      </main>
+      <footer>
+        <div class="infos">
+          <span><a href="#">이용약관</a></span>
+          <span><a href="#">개인정보처리방침</a></span>
+          <span><a href="#">예매가이드</a></span>
+          <span><a href="#">공지사항</a></span>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

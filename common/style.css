@@ -1,0 +1,333 @@
+@charset 'utf-8';
+
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-gov.min.css');
+
+:root {
+  background-color: #ffffff;
+  --header-color: #eff5ff;
+  --footer-color: #eff5ff;
+  --primary-color: #246beb;
+  --secondary-color: #003675;
+  --text-title: #1d1d1d;
+  --text-body: #555555;
+  --hover: #1d56bc;
+
+  --logo-size: 300px;
+
+  --size: 16px;
+
+  font-size: 16px;
+}
+.wrap {
+  overflow: hidden;
+}
+
+.wrap > * {
+  max-width: 1200px;
+  width: calc(100% - var(--size) * 2);
+  margin: auto;
+}
+
+header > * {
+  /* border: 1px solid red; */
+}
+header {
+  padding: 2rem 0;
+  display: flex;
+  background-color: var(--header-color);
+}
+header img {
+  /* width: 350px; */
+  /* min-width: 191px; */
+  padding-top: 1rem;
+  max-width: 100%;
+}
+header .logo {
+  width: var(--logo-size);
+}
+
+header nav {
+  display: flex;
+  justify-content: space-evenly;
+  width: calc(100% - (300px * 2));
+}
+
+header nav button {
+  width: 100%;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  transition: color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+header nav button:hover {
+  /* background-color: var(--hover); */
+  color: white;
+  box-shadow: inset 100px 0 0 0 var(--hover);
+}
+
+header .login {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: var(--logo-size);
+  font-size: var(--size);
+}
+header .login li {
+  margin: 0 auto;
+  width: 100%;
+  /* height: 100%; */
+  text-align: center;
+}
+header .login li:hover {
+  font-weight: 700;
+  cursor: pointer;
+  border-bottom-color: var(--hover);
+}
+
+.search > * {
+  /* border: 1px solid lightcoral; */
+}
+.search {
+  display: flex;
+  justify-content: space-around;
+}
+
+.inputArea {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+  padding: var(--size) 0;
+  background-color: #white;
+  border-radius: var(--size);
+  color: var(--text-body);
+}
+.inputArea input {
+  margin: 0 0 0 var(--size);
+  padding: var(--size);
+  border: 1px solid var(--primary-color);
+  border-radius: inherit;
+  /*   outline: none; */
+  /*  background-color: transparent;*/
+  color: var(--primary-color);
+  width: 100%;
+}
+.inputArea i {
+  padding: var(--size);
+  cursor: pointer;
+  color: var(--primary-color);
+  font-size: 1.5em;
+}
+.inputArea input:focus {
+  font-weight: bold;
+}
+
+.search button {
+  padding: 0 4em;
+  margin: 1em 0;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: var(--size);
+}
+
+.search button:hover {
+  font-weight: bold;
+}
+
+.ham {
+  display: none;
+}
+main {
+  padding-bottom: calc(var(--size) * 2);
+}
+
+/* Swiper (hero main visual) ----------------*/
+
+.swiper {
+  width: 100%;
+  height: 20rem;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #eaeaea;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* listCon = ul ----------------------------------*/
+.listCon {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 4rem;
+}
+.listCon > li {
+  border: 1px solid var(--text-body);
+  border-radius: var(--size);
+  line-height: 2em;
+  position: relative;
+  padding: var(--size);
+}
+.newsImg {
+  height: 150px;
+  border-radius: var(--size);
+  overflow: hidden;
+}
+.listCon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: 0.3s;
+  transform: scale(1);
+}
+.listCon > li p {
+  /* padding: 1em 0; */
+}
+.newsTitle {
+  font-weight: bold;
+  font-size: 1.2em;
+  padding-top: var(--size);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.desc {
+  font-size: 0.8em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  line-height: 1.5em;
+  max-height: 50px;
+  -webkit-line-clamp: 2; /* 표시하고자 하는 라인 수 */
+  -webkit-box-orient: vertical;
+}
+.source,
+.date {
+  color: var(--text-body);
+  font-size: 0.7em;
+}
+.more {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  color: transparent;
+}
+
+.listCon > li:hover img {
+  transform: scale(1.2);
+}
+
+.listCon .nolist {
+  text-align: center;
+  background-color: bisque;
+}
+
+/* category button의 부모요소인 div가 .pgcon ---------------- */
+.pgcon {
+  display: flex;
+  justify-content: center;
+  gap: var(--size);
+  padding: calc(var(--size) * 2) 0;
+}
+
+.pgcon button {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: none;
+  outline: none;
+  background-color: var(--primary-color);
+  color: white;
+  font-size: 1em;
+}
+.pgcon button:hover {
+  background-color: var(--secondary-color);
+  color: white;
+  cursor: pointer;
+}
+.pgcon button.on {
+  background-color: 246beb;
+  color: white;
+  font-weight: bold;
+}
+.prev,
+.next {
+  font-weight: bold;
+}
+/* media query ------------------------- */
+@media (max-width: 600px) {
+  .wrap header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: beige;
+    z-index: 100;
+  }
+  header nav {
+    position: fixed;
+    display: flex;
+    right: -100%;
+    transition: 0.3s;
+    flex-direction: column;
+    width: 50%;
+    height: 100vh;
+    top: 0;
+    background-color: #eaeaea;
+  }
+  header nav.on {
+    right: 0;
+  }
+  .ham {
+    display: block;
+    position: absolute;
+    right: var(--size);
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    z-index: 999;
+  }
+
+  main {
+    padding-top: 150px;
+  }
+}
+
+@media (max-width: 1000px) {
+  header nav,
+  header .login {
+    display: none;
+  }
+}
+
+/* footer ---------------------------- */
+footer {
+  background-color: var(--footer-color);
+  height: 8rem;
+  color: var(--text-body);
+  padding: var(--size) 0;
+  text-align: center;
+  border-top: 1px solid lightgray;
+}
+
+footer > * {
+  /* border: 1px solid red; */
+}
+
+footer .infos {
+  width: 70%;
+  display: flex;
+  justify-content: space-evenly;
+}
