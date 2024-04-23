@@ -19,10 +19,10 @@ const swiper = new Swiper('.mySwiper', {
   slideToClickedSlide: true, // 해당 슬라이드 클릭시 슬라이드 위치로 이동
 });
 
-
+// API_KEY ---------------------------
 const API_KEY = '45007259-bbfe-4600-a20e-63d6befc1ed2';
 
-// apis1.js -------------------------
+// apis1.js 참고 --------------------------
 const url = 'http://api.kcisa.kr/openapi/API_CCA_142/request'; /*URL*/
 let queryParams = new URLSearchParams({
   serviceKey: '45007259-bbfe-4600-a20e-63d6befc1ed2' /*서비스키*/,
@@ -47,8 +47,8 @@ fetch(url + '?' + queryParams.toString())
       const fields = [
         // 공연명
         'title',
-        // 
-        // 'collectionDb',
+        // 장르
+        'collectionDb',
         // 장르
         'subjectCategory',
         // 관련 링크
@@ -114,17 +114,17 @@ fetch(url + '?' + queryParams.toString())
 // };
 
 
-// 카데고리 클릭시 -------------------------
-const getNewsByCate = async (subjectCategory) => {
-  const url = new URL(
-    `http://api.kcisa.kr/openapi/API_CCA_142/request?serviceKey=${API_KEY}&infoTp=026&numOfRows=20`
-  );
-  fetchNews(url);
-};
+// // 카데고리 클릭시 -------------------------
+// const getNewsByCate = async (subjectCategory) => {
+//   const url = new URL(
+//     `http://api.kcisa.kr/openapi/API_CCA_142/request?serviceKey=${API_KEY}&infoTp=026&numOfRows=20`
+//   );
+//   fetchNews(url);
+// };
 
-nav.addEventListener('click', (e) => {
-  if (e.target.tagName !== 'BUTTON') return;
-  let subjectCategory = e.target.dataset.cate;
-  subjectCategory = subjectCategory.toLowerCase();
-  getNewsByCate(subjectCategory);
-});
+// nav.addEventListener('click', (e) => {
+//   if (e.target.tagName !== 'BUTTON') return;
+//   let subjectCategory = e.target.dataset.cate;
+//   subjectCategory = subjectCategory.toLowerCase();
+//   getNewsByCate(subjectCategory);
+// });
