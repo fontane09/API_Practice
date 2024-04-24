@@ -89,59 +89,7 @@ header .login li:hover {
   display: none;
 }
 
-/* 검색 영역 ---------------- */
-/* .search > * {
-  border: 1px solid lightcoral;
-} */
-.search {
-  display: flex;
-  justify-content: space-around;
-}
-
-.inputArea {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 50%;
-  padding: var(--size) 0;
-  background-color: #eaeaea;
-  border-radius: var(--size);
-  color: var(--text-body);
-}
-.inputArea input {
-  margin: 0 0 0 var(--size);
-  padding: var(--size);
-  border: 1px solid var(--primary-color);
-  border-radius: inherit;
-  /*   outline: none; */
-  /*  background-color: transparent;*/
-  color: var(--primary-color);
-  width: 100%;
-}
-.inputArea i {
-  padding: var(--size);
-  cursor: pointer;
-  color: var(--primary-color);
-  font-size: 1.5em;
-}
-.inputArea input:focus {
-  font-weight: bold;
-}
-
-.search button {
-  padding: 0 4em;
-  margin: 1em 0;
-  background-color: var(--primary-color);
-  color: white;
-  border: none;
-  border-radius: var(--size);
-}
-
-.search button:hover {
-  font-weight: bold;
-}
-
-/* Swiper (hero main visual) ----------------*/
+/* Swiper (hero main visual) ---------------- */
 
 .swiper {
   width: 100%;
@@ -185,7 +133,25 @@ main {
   line-height: 2em;
   /* position: relative; */
   padding: var(--size);
+  word-wrap: break-word;
+  transition: 0.2s;
+  text-align: center;
 }
+
+.listCon > li:hover {
+  transform: scale(1.05);
+  color: #eaeaea;
+  background: var(--primary-color);
+}
+
+.artTitle {
+  font-weight: bold;
+  font-size: 1.5em;
+}
+
+.
+
+
 .newsImg {
   height: 150px;
   border-radius: var(--size);
@@ -244,6 +210,56 @@ main {
   background-color: bisque;
 }
 
+/* 검색 영역 ---------------- */
+/* .search > * {
+  border: 1px solid lightcoral;
+} */
+/* .search {
+  display: flex;
+  justify-content: space-around;
+}
+
+.inputArea {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+  padding: var(--size) 0;
+  background-color: #eaeaea;
+  border-radius: var(--size);
+  color: var(--text-body);
+}
+.inputArea input {
+  margin: 0 0 0 var(--size);
+  padding: var(--size);
+  border: 1px solid var(--primary-color);
+  border-radius: inherit;
+  color: var(--primary-color);
+  width: 100%;
+}
+.inputArea i {
+  padding: var(--size);
+  cursor: pointer;
+  color: var(--primary-color);
+  font-size: 1.5em;
+}
+.inputArea input:focus {
+  font-weight: bold;
+}
+
+.search button {
+  padding: 0 4em;
+  margin: 1em 0;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: var(--size);
+}
+
+.search button:hover {
+  font-weight: bold;
+} */
+
 /* category button의 부모요소인 div가 .pgcon ---------------- */
 .pgcon {
   display: flex;
@@ -260,7 +276,6 @@ main {
   outline: none;
   background-color: var(--primary-color);
   color: white;
-  
 }
 .pgcon button:hover {
   background-color: var(--secondary-color);

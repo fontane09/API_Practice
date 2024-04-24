@@ -32,13 +32,16 @@ category.addEventListener('click', (e) => {
 const createElmLi = (item) => {
   // li에 추가할 내용 작성
   // <p>regDate : ${item.regDate}</p>
-  // <p>creator : ${item.creator}</p>
-  // <p>description : ${item.description}</p>
-  // <p>url : ${item.url}</p>
   // <p>데이터 구조를 파악하여 활용할 데이터를 바인딩하세요</p>
   return `
-  <li>
-    <p>title : ${item.title}</p>
+  <li><a href="${item.url}" target="_blank" rel="noopener noreferrer">
+    <p class="artTitle">${item.title}</p>
+    ${
+      item.subjectCategory !== null
+        ? `<p class="artGenre">장르 : ${item.subjectCategory}</p>`
+        : ''
+    }
+    <p hidden>클릭하면 공연정보 페이지로 넘어갑니다.</p></a> 
   </li>
   `;
 };
@@ -51,6 +54,12 @@ const addItems = async (items) => {
     listCon.appendChild(li);
   });
 };
+
+// const link = li.querySelector('a');
+// link.addEventListener('click', function(event) {
+//   event.preventDefault(); // 기본 동작(링크 이동) 방지
+//   window.location.href = ${item.url}; // 새로운 URL로 이동
+// });
 
 // 1. API를 호출하여 데이터를 가져오는 함수를 만들어보세요.
 let url = 'http://api.kcisa.kr/openapi/API_CCA_142/request'; /*URL*/
@@ -92,7 +101,7 @@ getLatestDatas(infoTpNo);
 
 // ------------------ mainvisual swiper 관련 JS ---------------------
 const swiper = new Swiper('.mySwiper', {
-  slidesPerView: 1,
+  slidesPerView: 4,
   spaceBetween: 80,
   centeredSlides: true,
   loop: true,
@@ -108,5 +117,5 @@ const swiper = new Swiper('.mySwiper', {
 
   // autoHeight: true, // true로 설정하면 슬라이더 래퍼가 현재 활성 슬라이드의 높이에 맞게 높이를 조정합니다.
   //resistance: false, // 슬라이드 터치에 대한 저항 여부 설정
-  //slideToClickedSlide: true, // 해당 슬라이드 클릭시 슬라이드 위치로 이동
+  slideToClickedSlide: true, // 해당 슬라이드 클릭시 슬라이드 위치로 이동
 });
