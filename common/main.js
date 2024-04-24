@@ -1,10 +1,102 @@
+const listCon = document.querySelector('.listCon');
+
+// API_KEY ---------------------------
+const API_KEY = '45007259-bbfe-4600-a20e-63d6befc1ed2';
+
+// 카테고리별 코드
+// 001 : 오페라
+// 005 : 연극
+// 007 : 무용
+// 008 : 뮤지컬
+// 017 : 콘서트
+// 018 : 클래식
+// 019 : 재즈
+// 020 : 크로스오버
+// 021 : 복합장르
+// 022 : 세계음악분수
+// 023 : 전시정보
+// 024 : 아카데미강좌
+// 026 : 공연전체
+
+let infoTpNo = '026';
+const category = document.querySelector('header nav');
+category.addEventListener('click', (e) => {
+  console.log(e.target.dataset.infotp); // 대문자 안됨
+  if (e.target.tagName !== 'BUTTON') return;
+  infoTpNo = e.target.dataset.infotp;
+  getLatestDatas(infoTpNo);
+});
+
+// apis1.js 참고 --------------------------
+
+const createElmLi = (item) => {
+  // li에 추가할 내용 작성
+  // <p>regDate : ${item.regDate}</p>
+  // <p>creator : ${item.creator}</p>
+  // <p>description : ${item.description}</p>
+  // <p>url : ${item.url}</p>
+  // <p>데이터 구조를 파악하여 활용할 데이터를 바인딩하세요</p>
+  return `
+  <li>
+    <p>title : ${item.title}</p>
+  </li>
+  `;
+};
+
+const addItems = async (items) => {
+  listCon.innerHTML = '';
+  items.map((item) => {
+    const li = document.createElement('li');
+    li.innerHTML = createElmLi(item);
+    listCon.appendChild(li);
+  });
+};
+
+// 1. API를 호출하여 데이터를 가져오는 함수를 만들어보세요.
+let url = 'http://api.kcisa.kr/openapi/API_CCA_142/request'; /*URL*/
+const getLatestDatas = async (infoTpNo) => {
+  //url에 queryparams를 붙여서 fetch로 데이터를 가져옴
+  let queryParams = new URLSearchParams({
+    serviceKey: API_KEY /*서비스키*/,
+    numOfRows: '8' /*세션당 요청레코드수*/,
+    pageNo: '1' /*페이지수*/,
+    infoTp: `${infoTpNo}` /*정보유형*/,
+  });
+
+  //url에 queryparams를 붙여서 fetch로 데이터를 가져옴
+  const response = await fetch(url + '?' + queryParams.toString(), {
+    method: 'GET',
+    headers: {
+      accept: 'application/json',
+    },
+  });
+  // console.log(response);
+  const data = await response.json();
+  console.log(data); // {response: {…}} 결과값이 나옴
+  const items = data.response.body.items.item;
+  // console.log(items); // (8) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}] 내용 확인
+
+  if (data.response.body.items !== null) {
+    let items = data.response.body.items.item;
+    // console.log(items);
+    addItems(items);
+  } else {
+    console.log('데이터가 없음');
+  }
+
+  // 2. 가져온 데이터를 화면에 표시하는 함수를 만들어보세요.
+  // 하나의 item이 어떤 데이터를 가지고 있는지 확인해보세요.
+};
+
+getLatestDatas(infoTpNo);
+
 // ------------------ mainvisual swiper 관련 JS ---------------------
 const swiper = new Swiper('.mySwiper', {
-  slidesPerView: 4,
+  slidesPerView: 1,
   spaceBetween: 80,
   centeredSlides: true,
   loop: true,
-  loopAdditionalSlides: 1,
+  // loopAdditionalSlides: 1,
   pagination: {
     el: '.swiper-pagination',
     clickable: true,
@@ -15,116 +107,6 @@ const swiper = new Swiper('.mySwiper', {
   },
 
   // autoHeight: true, // true로 설정하면 슬라이더 래퍼가 현재 활성 슬라이드의 높이에 맞게 높이를 조정합니다.
-  resistance: false, // 슬라이드 터치에 대한 저항 여부 설정
-  slideToClickedSlide: true, // 해당 슬라이드 클릭시 슬라이드 위치로 이동
+  //resistance: false, // 슬라이드 터치에 대한 저항 여부 설정
+  //slideToClickedSlide: true, // 해당 슬라이드 클릭시 슬라이드 위치로 이동
 });
-
-// API_KEY ---------------------------
-const API_KEY = '45007259-bbfe-4600-a20e-63d6befc1ed2';
-
-// apis1.js 참고 --------------------------
-const url = 'http://api.kcisa.kr/openapi/API_CCA_142/request'; /*URL*/
-let queryParams = new URLSearchParams({
-  serviceKey: '45007259-bbfe-4600-a20e-63d6befc1ed2' /*서비스키*/,
-  numOfRows: '8' /*세션당 요청레코드수*/,
-  pageNo: '1' /*페이지수*/,
-  infoTp: '026' /*페이지수*/,
-});
-
-fetch(url + '?' + queryParams.toString())
-  .then((response) => response.text())
-  .then((str) => new window.DOMParser().parseFromString(str, 'text/xml'))
-  .then((data) => {
-    console.log(
-      'resultCode: ' + data.getElementsByTagName('resultCode')[0].textContent
-    );
-    console.log(
-      'resultMsg: ' + data.getElementsByTagName('resultMsg')[0].textContent
-    );
-
-    const items = data.getElementsByTagName('item');
-    Array.from(items).forEach((item) => {
-      const fields = [
-        // 공연명
-        'title',
-        // 장르
-        'collectionDb',
-        // 장르
-        'subjectCategory',
-        // 관련 링크
-        'url',
-        // 등록일자 (공연일자 아님)
-        // 'regDate',
-      ];
-      const listCon = document.querySelector('.listCon');
-      const li = document.createElement('li');
-
-      fields.forEach((field) => {
-        const textContent = item.getElementsByTagName(field)[0]?.textContent;
-        if (textContent) {
-          const p = document.createElement('p');
-          p.textContent = `${field}: ${textContent}`;
-          li.appendChild(p);
-        }
-      });
-
-      listCon.appendChild(li);
-      console.log('list:', fields);
-      console.log('list:', listCon);
-    });
-  })
-  .catch((error) => console.error('Error:', error));
-
-// -------------------li 생성 html------------------------------
-
-// const createHtml = (news) => {
-//   let referenceIdentifier = news.referenceIdentifier ? news.referenceIdentifier : '../img/noimg.png';
-
-//   let title = news.title || '공연명 없음';
-//   let period = news.period || '공연 기간 미정';
-//   let urlLink = news.url ? news.url || '사이트 없음' : '사이트 없음';
-//   let contactPoint = news.contactPoint || '출처 없음';
-//   let description = news.description
-//     ? news.description.length > 30
-//       ? news.description.substring(0, 30) + '...'
-//       : news.description
-//     : '공연 내용 없음';
-
-//   return `
-//         <li>
-//             <div class="newsImg">
-//               <img
-//                 src="${imageObject}"
-//                 alt="${title}"
-//                 onerror="this.onerror=null; this.src='./img/noimg.png';"
-//               />
-//             </div>
-//             <p class="newsTitle">${title}</p>
-//             <span class="period">${period}</span>
-//             <span class="urlLink">${url}</span>
-//             <span class="contactPoint">${contactPoint}</span>
-//             <p class="desc">${description}</p>
-//             <a
-//               class="more"
-//               href="${news.url}"
-//               >자세히보기</a
-//             >
-//         </li>
-//       `;
-// };
-
-
-// // 카데고리 클릭시 -------------------------
-// const getNewsByCate = async (subjectCategory) => {
-//   const url = new URL(
-//     `http://api.kcisa.kr/openapi/API_CCA_142/request?serviceKey=${API_KEY}&infoTp=026&numOfRows=20`
-//   );
-//   fetchNews(url);
-// };
-
-// nav.addEventListener('click', (e) => {
-//   if (e.target.tagName !== 'BUTTON') return;
-//   let subjectCategory = e.target.dataset.cate;
-//   subjectCategory = subjectCategory.toLowerCase();
-//   getNewsByCate(subjectCategory);
-// });
