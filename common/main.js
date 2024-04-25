@@ -1,6 +1,10 @@
+const hamBtn = document.querySelector('.ham');
+const nav = document.querySelector('header > nav');
 const listCon = document.querySelector('.listCon');
+hamBtn.addEventListener('click', () => {
+  nav.classList.toggle('on');
+});
 
-// API_KEY ---------------------------
 const API_KEY = '45007259-bbfe-4600-a20e-63d6befc1ed2';
 
 // 카테고리별 코드
@@ -67,9 +71,9 @@ const getLatestDatas = async (infoTpNo) => {
   //url에 queryparams를 붙여서 fetch로 데이터를 가져옴
   let queryParams = new URLSearchParams({
     serviceKey: API_KEY /*서비스키*/,
-    numOfRows: '8' /*세션당 요청레코드수*/,
     pageNo: '1' /*페이지수*/,
     infoTp: `${infoTpNo}` /*정보유형*/,
+    numOfRows: '8' /*세션당 요청레코드수*/,
   });
 
   //url에 queryparams를 붙여서 fetch로 데이터를 가져옴
@@ -114,8 +118,54 @@ const swiper = new Swiper('.mySwiper', {
     delay: 2000,
     disableOnInteraction: true,
   },
-
+  breakpoints: {
+    0: {
+      slidesPerView: 1,
+      spaceBetween: 80,
+    },
+    400: {
+      slidesPerView: 2,
+      spaceBetween: 80,
+    },
+    700: {
+      slidesPerView: 3,
+      spaceBetween: 80,
+    },
+    1000: {
+      slidesPerView: 4,
+      spaceBetween: 80,
+    },
+  },
   // autoHeight: true, // true로 설정하면 슬라이더 래퍼가 현재 활성 슬라이드의 높이에 맞게 높이를 조정합니다.
   //resistance: false, // 슬라이드 터치에 대한 저항 여부 설정
   slideToClickedSlide: true, // 해당 슬라이드 클릭시 슬라이드 위치로 이동
 });
+
+// pagination -------------------------------------------------------
+let totalResults = 0;
+// page마다 들어갈 컨텐츠 갯수 = pageSize
+// numofRows
+let pageSize = 8;
+// pageNo
+let page = 1;
+// 페이지 버튼 갯수
+let groupSize = 5;
+
+const pagination = () => {
+  let pageGroup = Math.ceil(page / groupSize);
+
+  let lastPage = Math.min(
+    Math.ceil(totalResults / pageSize),
+    pageGroup * groupSize
+  );
+  
+  let firstPage = (pageGroup - 1) * groupSize + 1;
+
+  let paginationHtml = `<button class="prev"><i class="fa-solid fa-angle-left"></i></button>`;
+  for (let i = firstPage; i <= lastPage; i++) {
+    paginationHtml += `<button>${i}</button>`;
+  }
+  paginationHtml += `<button class="next"><i class="fa-solid fa-angle-right"></i></button>`;
+
+  document.querySelector('.pgcon').innerHTML = paginationHtml;
+};
