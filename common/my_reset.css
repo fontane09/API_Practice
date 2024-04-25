@@ -115,7 +115,7 @@ blockquote:before,
 blockquote:after,
 q:before,
 q:after {
-  content: "";
+  content: '';
   content: none;
 }
 table {
@@ -128,8 +128,3 @@ a {
   text-decoration: none;
 }
 
-/* 240424 임시로 추가된것. 삭제해도 됨! */
-button {
-  font-size: 16px;
-  padding: 0;
-}

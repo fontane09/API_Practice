@@ -141,6 +141,13 @@ const swiper = new Swiper('.mySwiper', {
   slideToClickedSlide: true, // 해당 슬라이드 클릭시 슬라이드 위치로 이동
 });
 
+
+
+
+
+
+
+
 // pagination -------------------------------------------------------
 let totalResults = 0;
 // page마다 들어갈 컨텐츠 갯수 = pageSize
@@ -169,3 +176,65 @@ const pagination = () => {
 
   document.querySelector('.pgcon').innerHTML = paginationHtml;
 };
+
+
+
+
+
+
+
+
+
+const random = document.getElementById('random')
+
+//fetch random meal from API
+const getRandomMeal = async () => {
+  //Clear meals and heading
+  mealsEl.innerHTML = ''
+  resultHeading.innerHTML = ''
+
+  const response = await fetch(url)
+  if (response.status === 200) {
+    const data = await response.json()
+    const meal = await data.meals[0]
+    addMealToDOM(meal)
+  } else {
+    throw new Error('Unable to fetch random meal')
+  }
+}
+
+//Add meal to DOM
+const addMealToDOM = (meal) => {
+  const ingredients = []
+
+  for (let i = 1; i <= 10; i ++) {
+    if (meal[`strIngredient${i}`]) {
+      ingredients.push(`${meal[`strIngredient${i}`]} - ${meal[`strMeasure${i}`]}`)
+    } else {
+      break
+    }
+  }
+  
+  resultHeading.innerHTML = ''
+  mealsEl.innerHTML = ''
+  single_mealEl.innerHTML = `
+    <div class="single-meal">
+      <h1>${meal.strMeal}</h1>
+      <div class="single-meal-info">
+        ${meal.strCategory ? `<p>분류 : ${meal.strCategory}</p>` : ''}
+        ${meal.strArea ? `<p>국가 : ${meal.strArea}</p>` : ''}
+      </div>
+      <img src="${meal.strMealThumb}" alt="${meal.strMeal}" />
+
+      <div class="main">
+        <h2>조리방법</h2>
+        <span></span>
+        <ul>
+          ${ingredients.map(ing => `<li>${ing}</li>`).join('')}
+        </ul>
+        <p>${meal.strInstructions}</p>
+
+      </div>
+    </div>
+  `
+}

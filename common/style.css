@@ -1,6 +1,6 @@
 @charset 'utf-8';
 
-@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-gov.min.css');
+@import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Nanum+Gothic&display=swap');
 
 :root {
   background-color: #ffffff;
@@ -16,7 +16,7 @@
 
   --size: 16px;
 
-  font-size: 16px !important;
+  font-family: 'Gowun Dodum', sans-serif;
 }
 .wrap {
   overflow: hidden;
@@ -59,6 +59,9 @@ header nav button {
   border: none;
   cursor: pointer;
   transition: color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  font-size: 16px;
+  padding: 0;
+  font-family: 'Gowun Dodum', sans-serif;
 }
 header nav button:hover {
   /* background-color: var(--hover); */
@@ -71,7 +74,7 @@ header .login {
   justify-content: space-evenly;
   align-items: center;
   width: var(--logo-size);
-  font-size: var(--size);
+  /* font-size: var(--size); */
 }
 header .login li {
   margin: 0 auto;
@@ -89,7 +92,17 @@ header .login li:hover {
   display: none;
 }
 
+.top3div {
+  font-weight: bold;
+  font-size: 2rem;
+  text-align: center;
+  padding: 1rem;
+}
 /* Swiper (hero main visual) ---------------- */
+
+.mySwiper {
+  /* margin-top: 5rem; */
+}
 
 .swiper {
   width: 100%;
@@ -299,22 +312,6 @@ main {
     width: 100%;
     z-index: 100;
   }
- 
-  /* 
-  header nav {
-    flex-direction: column;
-    align-items: flex-start;
-    margin: 0;
-  }
-
-  header nav li {
-    width: 100%;
-    text-align: center;
-  } */
-
-  /* main {
-    padding-top: 150px;
-  } */
 }
 
 @media (max-width: 850px) {
@@ -323,40 +320,40 @@ main {
     padding: 1rem;
     font-size: 2rem;
     display: block;
-    position: absolute;
+    position: fixed;
     right: var(--size);
     cursor: pointer;
     z-index: 999;
   }
-
-  
   header nav {
     position: fixed;
     display: flex;
     right: -100%;
-    transition: 0.3s;
     flex-direction: column;
-    width: 50%;
-    height: 60vh;
+    width: 35%;
+    height: 40vh;
     top: 0;
     background-color: var(--header-color);
-    z-index: 9999;
-    padding: 1rem 0
+    z-index: 1000;
+    padding-right: 0;
+    margin-right: 1rem;
   }
 
   header nav.on {
     right: 0;
+    top: 6rem;
   }
 
   header nav button {
     width: 100%;
-  height: 100%;
+    height: 100%;
     /* background-color: transparent; */
-  border: none;
-  cursor: pointer;
-  transition: color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    border: none;
+    cursor: pointer;
+    transition: color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    font-size: 1.2em;
   }
-  
+
   header nav button:hover {
     background-color: var(--hover);
     color: white;
