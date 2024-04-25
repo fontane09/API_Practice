@@ -45,8 +45,9 @@ const createElmLi = (item) => {
         ? `<p class="artGenre">장르 : ${item.subjectCategory}</p>`
         : ''
     }
-    <p hidden>클릭하면 공연정보 페이지로 넘어갑니다.</p></a> 
-  </li>
+    <p>공연 일자 : 2024-04-28</p>
+    <p>공연 장소 : 예술의 전당</p>
+    <p hidden>클릭하면 공연정보 페이지로 넘어갑니다.</p>
   `;
 };
 
@@ -88,10 +89,13 @@ const getLatestDatas = async (infoTpNo) => {
   console.log(data); // {response: {…}} 결과값이 나옴
   const items = data.response.body.items.item;
   // console.log(items); // (8) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}] 내용 확인
+  let totalCounts = data.response.body.totalCount; // totalCount 가져오기
+  // console.log(totalCounts);
 
   if (data.response.body.items !== null) {
     let items = data.response.body.items.item;
     // console.log(items);
+
     addItems(items);
   } else {
     console.log('데이터가 없음');
@@ -141,15 +145,8 @@ const swiper = new Swiper('.mySwiper', {
   slideToClickedSlide: true, // 해당 슬라이드 클릭시 슬라이드 위치로 이동
 });
 
-
-
-
-
-
-
-
 // pagination -------------------------------------------------------
-let totalResults = 0;
+// let totalCounts = data.response.body.totalCount;
 // page마다 들어갈 컨텐츠 갯수 = pageSize
 // numofRows
 let pageSize = 8;
@@ -162,10 +159,10 @@ const pagination = () => {
   let pageGroup = Math.ceil(page / groupSize);
 
   let lastPage = Math.min(
-    Math.ceil(totalResults / pageSize),
+    Math.ceil(totalCounts / pageSize),
     pageGroup * groupSize
   );
-  
+
   let firstPage = (pageGroup - 1) * groupSize + 1;
 
   let paginationHtml = `<button class="prev"><i class="fa-solid fa-angle-left"></i></button>`;
@@ -177,64 +174,56 @@ const pagination = () => {
   document.querySelector('.pgcon').innerHTML = paginationHtml;
 };
 
+// const random = document.getElementById('random')
 
+// //fetch random meal from API
+// const getRandomMeal = async () => {
+//   //Clear meals and heading
+//   mealsEl.innerHTML = ''
+//   resultHeading.innerHTML = ''
 
+//   const response = await fetch(url)
+//   if (response.status === 200) {
+//     const data = await response.json()
+//     const meal = await data.meals[0]
+//     addMealToDOM(meal)
+//   } else {
+//     throw new Error('Unable to fetch random meal')
+//   }
+// }
 
+// //Add meal to DOM
+// const addMealToDOM = (meal) => {
+//   const ingredients = []
 
+//   for (let i = 1; i <= 10; i ++) {
+//     if (meal[`strIngredient${i}`]) {
+//       ingredients.push(`${meal[`strIngredient${i}`]} - ${meal[`strMeasure${i}`]}`)
+//     } else {
+//       break
+//     }
+//   }
 
+//   resultHeading.innerHTML = ''
+//   mealsEl.innerHTML = ''
+//   single_mealEl.innerHTML = `
+//     <div class="single-meal">
+//       <h1>${meal.strMeal}</h1>
+//       <div class="single-meal-info">
+//         ${meal.strCategory ? `<p>분류 : ${meal.strCategory}</p>` : ''}
+//         ${meal.strArea ? `<p>국가 : ${meal.strArea}</p>` : ''}
+//       </div>
+//       <img src="${meal.strMealThumb}" alt="${meal.strMeal}" />
 
+//       <div class="main">
+//         <h2>조리방법</h2>
+//         <span></span>
+//         <ul>
+//           ${ingredients.map(ing => `<li>${ing}</li>`).join('')}
+//         </ul>
+//         <p>${meal.strInstructions}</p>
 
-
-const random = document.getElementById('random')
-
-//fetch random meal from API
-const getRandomMeal = async () => {
-  //Clear meals and heading
-  mealsEl.innerHTML = ''
-  resultHeading.innerHTML = ''
-
-  const response = await fetch(url)
-  if (response.status === 200) {
-    const data = await response.json()
-    const meal = await data.meals[0]
-    addMealToDOM(meal)
-  } else {
-    throw new Error('Unable to fetch random meal')
-  }
-}
-
-//Add meal to DOM
-const addMealToDOM = (meal) => {
-  const ingredients = []
-
-  for (let i = 1; i <= 10; i ++) {
-    if (meal[`strIngredient${i}`]) {
-      ingredients.push(`${meal[`strIngredient${i}`]} - ${meal[`strMeasure${i}`]}`)
-    } else {
-      break
-    }
-  }
-  
-  resultHeading.innerHTML = ''
-  mealsEl.innerHTML = ''
-  single_mealEl.innerHTML = `
-    <div class="single-meal">
-      <h1>${meal.strMeal}</h1>
-      <div class="single-meal-info">
-        ${meal.strCategory ? `<p>분류 : ${meal.strCategory}</p>` : ''}
-        ${meal.strArea ? `<p>국가 : ${meal.strArea}</p>` : ''}
-      </div>
-      <img src="${meal.strMealThumb}" alt="${meal.strMeal}" />
-
-      <div class="main">
-        <h2>조리방법</h2>
-        <span></span>
-        <ul>
-          ${ingredients.map(ing => `<li>${ing}</li>`).join('')}
-        </ul>
-        <p>${meal.strInstructions}</p>
-
-      </div>
-    </div>
-  `
-}
+//       </div>
+//     </div>
+//   `
+// }

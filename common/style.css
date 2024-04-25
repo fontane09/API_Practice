@@ -146,7 +146,7 @@ main {
   line-height: 2em;
   /* position: relative; */
   padding: var(--size);
-  word-wrap: break-word;
+  word-break: keep-all;
   transition: 0.2s;
   text-align: center;
 }
@@ -162,7 +162,7 @@ main {
   font-size: 1.5em;
 }
 
-.newsImg {
+/* .newsImg {
   height: 150px;
   border-radius: var(--size);
   overflow: hidden;
@@ -173,7 +173,7 @@ main {
   object-fit: cover;
   transition: 0.3s;
   transform: scale(1);
-}
+} */
 .listCon > li p {
   padding: 1em 0;
 }
