@@ -312,6 +312,9 @@ main {
     width: 100%;
     z-index: 100;
   }
+  .hero {
+    margin-top: 9rem;
+  }
 }
 
 @media (max-width: 850px) {

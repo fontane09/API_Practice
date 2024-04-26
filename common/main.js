@@ -48,6 +48,7 @@ const createElmLi = (item) => {
     <p>공연 일자 : 2024-04-28</p>
     <p>공연 장소 : 예술의 전당</p>
     <p hidden>클릭하면 공연정보 페이지로 넘어갑니다.</p>
+    </li>
   `;
 };
 
@@ -89,8 +90,6 @@ const getLatestDatas = async (infoTpNo) => {
   console.log(data); // {response: {…}} 결과값이 나옴
   const items = data.response.body.items.item;
   // console.log(items); // (8) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}] 내용 확인
-  const totalCounts = data.response.body.totalCount; // totalCount 가져오기
-  // // console.log(totalCounts);
 
   if (data.response.body.items !== null) {
     let items = data.response.body.items.item;
@@ -146,7 +145,7 @@ const swiper = new Swiper('.mySwiper', {
 });
 
 // // pagination -------------------------------------------------------
-const totalCounts = data.response.body.totalCount;
+let totalCounts = data.response.body.totalCount;
 // page마다 들어갈 컨텐츠 갯수 = pageSize
 // numofRows
 let pageSize = 8;
@@ -157,7 +156,6 @@ let groupSize = 5;
 
 const pagination = () => {
   let pageGroup = Math.ceil(page / groupSize);
-
   let lastPage = Math.min(
     Math.ceil(totalCounts / pageSize),
     pageGroup * groupSize
