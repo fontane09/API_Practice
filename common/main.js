@@ -31,7 +31,37 @@ category.addEventListener('click', (e) => {
   getLatestDatas(infoTpNo);
 });
 
-// apis1.js 참고 --------------------------
+// API에 없는 정보 임의로 만들어 내기. 공연일자 랜덤 생성.
+function getRandomDate() {
+  let randomYear = 2024;
+  let randomMonth = Math.floor(Math.random() * 12);
+  let daysInMonth = new Date(randomYear, randomMonth, 0).getDate();
+  let randomDay = Math.floor(Math.random() * daysInMonth) + 1;
+  // 날짜를 yyyy-mm-dd 형식으로 반환
+  let formatDate =
+    randomYear +
+    '-' +
+    (randomMonth < 9 ? '0' : '') +
+    (randomMonth + 1) +
+    '-' +
+    (randomDay < 10 ? '0' : '') +
+    randomDay;
+
+  return formatDate;
+}
+// API에 없는 장소 정보 임의로 만들어 내기. 공연장소 '예술의전당 + xxx' 랜덤 생성.
+function getRandomSite() {
+  const sites = [
+    '콘서트홀',
+    '오페라극장',
+    'CJ토월극장',
+    '인촌아트홀',
+    '리사이틀홀',
+    'IBK홀',
+  ];
+  const randomIndex = Math.floor(Math.random() * sites.length);
+  return sites[randomIndex];
+}
 
 const createElmLi = (item) => {
   // li에 추가할 내용 작성
@@ -45,9 +75,9 @@ const createElmLi = (item) => {
         ? `<p class="artGenre">장르 : ${item.subjectCategory}</p>`
         : ''
     }
-    <p>공연 일자 : 2024-04-28</p>
-    <p>공연 장소 : 예술의 전당</p>
-    <p hidden>클릭하면 공연정보 페이지로 넘어갑니다.</p>
+    <p>공연 일자 : <br>${getRandomDate()}</p>
+    <p>공연 장소 : <br>예술의 전당 ${getRandomSite()}</p>
+    <p>(클릭하면 공연정보 페이지로)</p>
     </li>
   `;
 };
